@@ -67,7 +67,7 @@ export function StudioHero() {
 
       <p className="studio-sub mt-6 max-w-xl text-balance text-lg text-white/60">
         A fictional studio landing page, composed entirely from BlueWeb&apos;s
-        component library — proof the pieces work together.
+        component library: proof the pieces work together.
       </p>
 
       <div className="studio-cta mt-10">

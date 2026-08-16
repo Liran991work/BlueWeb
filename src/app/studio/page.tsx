@@ -15,7 +15,7 @@ export default function StudioPage() {
       <WorkGrid />
       <StudioCta />
       <footer className="border-t border-white/10 px-6 py-10 text-center text-sm text-white/40">
-        BlueWeb Studio — a fictional page proving the component library works
+        BlueWeb Studio: a fictional page proving the component library works
         together.
       </footer>
     </main>

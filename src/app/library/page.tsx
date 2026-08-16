@@ -49,7 +49,7 @@ export default function LibraryPage() {
           Component Library
         </h1>
         <p className="mt-3 max-w-xl text-white/50">
-          Every MagicUI piece installed in this project, in one place — a
+          Every MagicUI piece installed in this project, in one place: a
           reference for building the next BlueWeb page without starting from
           scratch.
         </p>
@@ -94,7 +94,7 @@ export default function LibraryPage() {
                 <NumberTicker value={247} />
               </span>
             </ShowcaseCard>
-            <ShowcaseCard title="Text Reveal" description="Full scroll-driven version lives on the homepage — needs 200vh of scroll room to work.">
+            <ShowcaseCard title="Text Reveal" description="Full scroll-driven version lives on the homepage (needs 200vh of scroll room to work).">
               <Link href="/" className="text-sm text-white/50 underline underline-offset-4 hover:text-white">
                 See it on the homepage →
               </Link>
@@ -238,7 +238,7 @@ export default function LibraryPage() {
             </ShowcaseCard>
             <ShowcaseCard
               title="Cursor Follower"
-              description="Global effect, mounted once in the layout — hover this box."
+              description="Global effect, mounted once in the layout. Hover this box."
             >
               <div
                 data-cursor-hover
@@ -251,7 +251,7 @@ export default function LibraryPage() {
           <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.02] p-6">
             <h3 className="text-sm font-semibold text-white/80">Parallax</h3>
             <p className="mt-1 text-xs text-white/40">
-              Scroll past this section — the two layers move at different
+              Scroll past this section: the two layers move at different
               speeds.
             </p>
             <div className="relative mt-5 h-72 overflow-hidden rounded-xl border border-white/5 bg-black/40">

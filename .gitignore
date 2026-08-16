@@ -40,6 +40,7 @@ yarn-error.log*
 # absolute paths specific to this machine, so they don't survive a clone)
 /.agents/
 /.claude/skills/
+/.claude/scheduled_tasks.lock
 
 # typescript
 *.tsbuildinfo

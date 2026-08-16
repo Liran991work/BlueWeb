@@ -10,7 +10,7 @@ export default function Home() {
       <LogoMarquee />
       <ScrollFeatures />
       <TextReveal>
-        Smooth scroll, scroll-triggered motion, and reusable UI — this is the
+        Smooth scroll, scroll-triggered motion, and reusable UI: this is the
         baseline every BlueWeb build starts from.
       </TextReveal>
       <footer className="border-t border-white/10 px-6 py-10 text-center text-sm text-white/40">

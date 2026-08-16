@@ -2,6 +2,7 @@
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Link from "next/link";
 import { useRef } from "react";
 
 import { AnimatedGradientText } from "@/components/ui/animated-gradient-text";
@@ -56,9 +57,7 @@ export function Hero() {
       />
 
       <div className="hero-badge mb-6 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm backdrop-blur">
-        <AnimatedGradientText>
-          GSAP &middot; Lenis &middot; MagicUI
-        </AnimatedGradientText>
+        <AnimatedGradientText>GSAP, Lenis &amp; MagicUI</AnimatedGradientText>
       </div>
 
       <h1 className="max-w-4xl text-balance text-5xl font-bold leading-tight tracking-tight md:text-7xl">
@@ -77,9 +76,11 @@ export function Hero() {
       </p>
 
       <div className="hero-cta mt-10">
-        <ShimmerButton>
-          <span className="text-sm font-medium">Scroll to explore</span>
-        </ShimmerButton>
+        <Link href="/library">
+          <ShimmerButton>
+            <span className="text-sm font-medium">Explore the library</span>
+          </ShimmerButton>
+        </Link>
       </div>
     </section>
   );

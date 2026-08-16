@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const FEATURES = [
   {
     title: "GSAP",
-    body: "Timeline-driven animation for anything DOM, SVG, or canvas — this whole page's motion runs through it.",
+    body: "Timeline-driven animation for anything DOM, SVG, or canvas. This whole page's motion runs through it.",
   },
   {
     title: "Lenis",
@@ -18,7 +18,7 @@ const FEATURES = [
   },
   {
     title: "MagicUI",
-    body: "Copy-paste, shadcn-flavored components — buttons, text effects, backgrounds — for polish without the rebuild.",
+    body: "Copy-paste, shadcn-flavored components (buttons, text effects, backgrounds) for polish without the rebuild.",
   },
 ];
 
@@ -49,15 +49,19 @@ export function ScrollFeatures() {
   return (
     <section
       ref={container}
-      className="mx-auto grid max-w-5xl gap-6 px-6 py-32 md:grid-cols-3"
+      className="mx-auto grid max-w-5xl gap-6 px-6 py-32 md:grid-cols-2"
     >
-      {FEATURES.map((f) => (
+      {FEATURES.map((f, i) => (
         <div
           key={f.title}
-          className="feature-card rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur"
+          className={`feature-card rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur ${
+            i === 0 ? "md:col-span-2 md:p-10" : ""
+          }`}
         >
-          <h3 className="text-xl font-semibold">{f.title}</h3>
-          <p className="mt-3 text-sm text-white/60">{f.body}</p>
+          <h3 className={i === 0 ? "text-2xl font-semibold" : "text-xl font-semibold"}>
+            {f.title}
+          </h3>
+          <p className="mt-3 max-w-2xl text-sm text-white/60">{f.body}</p>
         </div>
       ))}
     </section>

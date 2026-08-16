@@ -12,7 +12,7 @@ const SERVICES = [
   {
     name: "Web",
     Icon: Code2,
-    description: "Fast, animated, accessible sites — like this one.",
+    description: "Fast, animated, accessible sites, like this one.",
     gradient: "from-blue-500/10",
   },
   {
@@ -29,8 +29,8 @@ export function ServicesGrid() {
       <h2 className="text-xs font-semibold tracking-widest text-white/40 uppercase">
         Services
       </h2>
-      <BentoGrid className="mt-6 auto-rows-[14rem] grid-cols-1 gap-4 md:grid-cols-3">
-        {SERVICES.map(({ name, Icon, description, gradient }) => (
+      <BentoGrid className="mt-6 auto-rows-[14rem] grid-cols-1 gap-4 md:grid-cols-2">
+        {SERVICES.map(({ name, Icon, description, gradient }, i) => (
           <BentoCard
             key={name}
             name={name}
@@ -38,7 +38,7 @@ export function ServicesGrid() {
             description={description}
             href="#"
             cta="Learn more"
-            className="col-span-1"
+            className={i === 0 ? "col-span-1 md:col-span-2" : "col-span-1"}
             background={
               <div
                 className={`absolute inset-0 bg-gradient-to-br ${gradient} to-transparent`}

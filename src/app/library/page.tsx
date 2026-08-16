@@ -29,6 +29,7 @@ import { TypingAnimation } from "@/components/ui/typing-animation";
 import { BeamDemo } from "@/components/demo/beam-demo";
 import { MagneticButton } from "@/components/motion/magnetic-button";
 import { Parallax } from "@/components/motion/parallax";
+import { RouteTransition } from "@/components/route-transition";
 import { ShowcaseCard } from "@/components/showcase-card";
 
 const AVATARS = [
@@ -43,6 +44,7 @@ const DOCK_ICONS = [Home, Search, Bell, Mail, Settings];
 
 export default function LibraryPage() {
   return (
+    <RouteTransition>
     <main className="min-h-screen bg-black px-6 py-28 text-white">
       <div className="mx-auto max-w-5xl">
         <h1 className="text-4xl font-bold tracking-tight">
@@ -294,5 +296,6 @@ export default function LibraryPage() {
         </section>
       </div>
     </main>
+    </RouteTransition>
   );
 }

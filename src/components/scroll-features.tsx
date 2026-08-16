@@ -58,9 +58,9 @@ export function ScrollFeatures() {
             i === 0 ? "md:col-span-2 md:p-10" : ""
           }`}
         >
-          <h3 className={i === 0 ? "text-2xl font-semibold" : "text-xl font-semibold"}>
+          <h2 className={i === 0 ? "text-2xl font-semibold" : "text-xl font-semibold"}>
             {f.title}
-          </h3>
+          </h2>
           <p className="mt-3 max-w-2xl text-sm text-white/60">{f.body}</p>
         </div>
       ))}

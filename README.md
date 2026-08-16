@@ -33,6 +33,18 @@ Next.js 16 (App Router, Turbopack) + Tailwind v4 + shadcn/ui, wired with:
 
 Deployed to GitHub Pages via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) on every push to `main` — static export (`output: "export"` in `next.config.ts`), no server needed since there are no API routes, Server Actions, or dynamic routes. `next.config.ts`'s `basePath` comes from the `PAGES_BASE_PATH` env var, which `actions/configure-pages` supplies automatically in CI (so it resolves to `/BlueWeb` there); it's `undefined` for local `npm run dev`/`npm run build`, matching the official [nextjs/deploy-github-pages](https://github.com/nextjs/deploy-github-pages) template pattern. To test the exported build locally with the GitHub Pages path: `PAGES_BASE_PATH=/BlueWeb npm run build` (on Windows Git Bash, prefix with `MSYS_NO_PATHCONV=1` or the path gets mangled).
 
+## Accessibility
+
+Scanned with AccessLint's `accessibility-scan` skill (`@accesslint/cli` + `@accesslint/chrome`, run over CDP against a live page — a real WCAG 2.2 rule engine, not a linter heuristic):
+
+```bash
+npx -y @accesslint/chrome@latest ensure --download   # one-time managed Chrome
+npx -y @accesslint/cli@latest scan "http://localhost:3000" --port 9222 --format json
+npx -y @accesslint/chrome@latest stop --all           # tear down when done
+```
+
+All three routes currently pass with zero violations. Re-run after any change that touches interactive elements or heading structure — it caught two real bugs during development (see notes below).
+
 ## Commands
 
 ```bash
@@ -56,3 +68,5 @@ npm run lint    # ESLint (includes the react-hooks/refs rule)
 - `<Parallax>` layers: if a scrub `ScrollTrigger` on a freshly-added instance doesn't seem to pick up (no inline `transform` applied), clear `.next` and restart the dev server before assuming it's a code bug — Turbopack HMR state got stale enough during iteration to reliably reproduce a "second instance never animates" symptom that a clean restart resolved every time.
 - **View Transitions need no config flag in Next.js 16** — `experimental.viewTransition` (documented by the `vercel-react-view-transitions` skill, presumably accurate for an earlier Next version) errors as an unrecognized key here; per Next's own bundled docs (`node_modules/next/dist/docs/01-app/02-guides/view-transitions.md`), the App Router supports `<ViewTransition>` out of the box. Always cross-check a skill's setup step against the framework's own bundled docs when they're this version-specific.
 - `<ViewTransition>` must be the outermost element of each page's returned JSX (before any DOM nodes) for `enter`/`exit` to fire, and it belongs in each `page.tsx`, not the root layout — layouts persist across navigations and never unmount, so a layout-level wrapper's enter/exit never retriggers. See `route-transition.tsx` and how `page.tsx`/`library/page.tsx`/`studio/page.tsx` each wrap their `<main>` in it.
+- `ShimmerButton` wrapped in `<Link>` nested a `<button>` inside an `<a>` — invalid HTML, breaks keyboard/screen-reader nav (WCAG 4.1.2), caught by `accessibility-scan`. Fixed by adding `asChild` to `ShimmerButton`: since it renders multiple decorative sibling `<div>`s alongside `children` (not just one), Radix `Slot` can't merge props onto it (`Slot` needs exactly one child) — used `React.cloneElement` instead, moving the decoration *inside* the child's own children rather than as siblings. Any future "button-as-link" component needs the same treatment if it has decorative markup beyond `children`.
+- Section headings must increase by one level with no skips (`h1` → `h2` → `h3`, never `h1` → `h3`) — `accessibility-scan` flagged `ScrollFeatures`' `<h3>` feature-card titles on the homepage, which had no `<h2>` before them (unlike `/library` and `/studio`, which have visible section labels as `<h2>`). Fixed by changing them to `<h2>`.

@@ -76,11 +76,11 @@ export function Hero() {
       </p>
 
       <div className="hero-cta mt-10">
-        <Link href="/library">
-          <ShimmerButton>
+        <ShimmerButton asChild>
+          <Link href="/library">
             <span className="text-sm font-medium">Explore the library</span>
-          </ShimmerButton>
-        </Link>
+          </Link>
+        </ShimmerButton>
       </div>
     </section>
   );

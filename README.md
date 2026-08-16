@@ -29,6 +29,10 @@ Next.js 16 (App Router, Turbopack) + Tailwind v4 + shadcn/ui, wired with:
 
 `MagicCard` needs a theme context, so `src/components/theme-provider.tsx` (wrapping `next-themes`) is mounted in the root layout with `defaultTheme="dark"` / `enableSystem={false}` — this replaced the earlier hardcoded `dark` class on `<html>`.
 
+## Deployment
+
+Deployed to GitHub Pages via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) on every push to `main` — static export (`output: "export"` in `next.config.ts`), no server needed since there are no API routes, Server Actions, or dynamic routes. `next.config.ts`'s `basePath` comes from the `PAGES_BASE_PATH` env var, which `actions/configure-pages` supplies automatically in CI (so it resolves to `/BlueWeb` there); it's `undefined` for local `npm run dev`/`npm run build`, matching the official [nextjs/deploy-github-pages](https://github.com/nextjs/deploy-github-pages) template pattern. To test the exported build locally with the GitHub Pages path: `PAGES_BASE_PATH=/BlueWeb npm run build` (on Windows Git Bash, prefix with `MSYS_NO_PATHCONV=1` or the path gets mangled).
+
 ## Commands
 
 ```bash

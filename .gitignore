@@ -36,6 +36,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# agent skills (local tooling, not app code — .claude/skills symlinks use
+# absolute paths specific to this machine, so they don't survive a clone)
+/.agents/
+/.claude/skills/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -6,12 +6,20 @@ export function SiteNav() {
       <Link href="/" className="text-sm font-semibold tracking-tight">
         BlueWeb
       </Link>
-      <Link
-        href="/library"
-        className="text-sm text-white/60 transition-colors hover:text-white"
-      >
-        Component Library
-      </Link>
+      <div className="flex items-center gap-6">
+        <Link
+          href="/studio"
+          className="text-sm text-white/60 transition-colors hover:text-white"
+        >
+          Studio
+        </Link>
+        <Link
+          href="/library"
+          className="text-sm text-white/60 transition-colors hover:text-white"
+        >
+          Component Library
+        </Link>
+      </div>
     </header>
   );
 }

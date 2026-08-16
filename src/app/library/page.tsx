@@ -27,6 +27,8 @@ import { RainbowButton } from "@/components/ui/rainbow-button";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { TypingAnimation } from "@/components/ui/typing-animation";
 import { BeamDemo } from "@/components/demo/beam-demo";
+import { MagneticButton } from "@/components/motion/magnetic-button";
+import { Parallax } from "@/components/motion/parallax";
 import { ShowcaseCard } from "@/components/showcase-card";
 
 const AVATARS = [
@@ -215,6 +217,55 @@ export default function LibraryPage() {
                 </OrbitingCircles>
               </div>
             </ShowcaseCard>
+          </div>
+        </section>
+
+        {/* Cursor & motion */}
+        <section className="mt-16">
+          <h2 className="text-xs font-semibold tracking-widest text-white/40 uppercase">
+            Cursor &amp; Motion
+          </h2>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <ShowcaseCard
+              title="Magnetic Button"
+              description="Move your cursor near the button."
+            >
+              <MagneticButton>
+                <ShimmerButton>
+                  <span className="text-sm font-medium">Pull me</span>
+                </ShimmerButton>
+              </MagneticButton>
+            </ShowcaseCard>
+            <ShowcaseCard
+              title="Cursor Follower"
+              description="Global effect, mounted once in the layout — hover this box."
+            >
+              <div
+                data-cursor-hover
+                className="flex h-full w-full items-center justify-center rounded-lg border border-dashed border-white/15 text-sm text-white/50"
+              >
+                Hover here
+              </div>
+            </ShowcaseCard>
+          </div>
+          <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.02] p-6">
+            <h3 className="text-sm font-semibold text-white/80">Parallax</h3>
+            <p className="mt-1 text-xs text-white/40">
+              Scroll past this section — the two layers move at different
+              speeds.
+            </p>
+            <div className="relative mt-5 h-72 overflow-hidden rounded-xl border border-white/5 bg-black/40">
+              <Parallax speed={0.15} className="absolute inset-0">
+                <div className="flex h-full items-center justify-center text-6xl">
+                  🌙
+                </div>
+              </Parallax>
+              <Parallax speed={0.4} className="absolute inset-0">
+                <div className="flex h-full items-end justify-center pb-6 text-sm text-white/50">
+                  Foreground layer
+                </div>
+              </Parallax>
+            </div>
           </div>
         </section>
 

@@ -13,24 +13,30 @@ export function Hero() {
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      const mm = gsap.matchMedia();
 
-      tl.from(".hero-badge", { y: -16, opacity: 0, duration: 0.6 })
-        .from(
-          ".hero-word",
-          { yPercent: 120, opacity: 0, stagger: 0.06, duration: 0.9 },
-          "-=0.3",
-        )
-        .from(
-          ".hero-sub",
-          { y: 20, opacity: 0, duration: 0.7 },
-          "-=0.5",
-        )
-        .from(
-          ".hero-cta",
-          { y: 20, opacity: 0, duration: 0.6 },
-          "-=0.4",
-        );
+      // Skips the entrance animation entirely under prefers-reduced-motion —
+      // elements just render in their final (non-`.from()`) state.
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+        tl.from(".hero-badge", { y: -16, opacity: 0, duration: 0.6 })
+          .from(
+            ".hero-word",
+            { yPercent: 120, opacity: 0, stagger: 0.06, duration: 0.9 },
+            "-=0.3",
+          )
+          .from(
+            ".hero-sub",
+            { y: 20, opacity: 0, duration: 0.7 },
+            "-=0.5",
+          )
+          .from(
+            ".hero-cta",
+            { y: 20, opacity: 0, duration: 0.6 },
+            "-=0.4",
+          );
+      });
     },
     { scope: container },
   );

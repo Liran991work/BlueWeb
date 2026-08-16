@@ -27,16 +27,20 @@ export function ScrollFeatures() {
 
   useGSAP(
     () => {
-      gsap.from(".feature-card", {
-        y: 60,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top 75%",
-        },
+      const mm = gsap.matchMedia();
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.from(".feature-card", {
+          y: 60,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: container.current,
+            start: "top 75%",
+          },
+        });
       });
     },
     { scope: container },

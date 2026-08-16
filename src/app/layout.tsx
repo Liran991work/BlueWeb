@@ -4,6 +4,8 @@ import "lenis/dist/lenis.css";
 import "./globals.css";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { SiteNav } from "@/components/site-nav";
+import { CursorFollower } from "@/components/motion/cursor-follower";
+import { PageTransition } from "@/components/page-transition";
 import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = Geist({
@@ -37,7 +39,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           <SmoothScroll>
             <SiteNav />
-            {children}
+            <CursorFollower />
+            <PageTransition>{children}</PageTransition>
           </SmoothScroll>
         </ThemeProvider>
       </body>

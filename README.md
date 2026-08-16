@@ -10,6 +10,12 @@ Next.js 16 (App Router, Turbopack) + Tailwind v4 + shadcn/ui, wired with:
   npx shadcn@latest add "@magicui/<component-name>"
   ```
 
+- **[react-bits](https://reactbits.dev)** — open-source, no account needed (unlike [21st.dev](https://21st.dev), whose registry requires an authenticated account — skipped for that reason). CSS/GSAP-first; pulls in `ogl` (a small WebGL library, not Three.js) only for components that need it. Two in `src/components/community/`: `split-text.tsx` (GSAP `SplitText` character reveal) and `aurora.tsx` (WebGL shader background — our first real WebGL component). Installed the same way as MagicUI, via the shadcn CLI, e.g.:
+
+  ```bash
+  npx shadcn@latest add "@react-bits/<ComponentName>-TS-TW"
+  ```
+
 ## How the pieces connect
 
 - `src/app/layout.tsx` wraps `{children}` in `<SmoothScroll>`, so every route gets Lenis smooth scroll for free.
@@ -70,3 +76,5 @@ npm run lint    # ESLint (includes the react-hooks/refs rule)
 - `<ViewTransition>` must be the outermost element of each page's returned JSX (before any DOM nodes) for `enter`/`exit` to fire, and it belongs in each `page.tsx`, not the root layout — layouts persist across navigations and never unmount, so a layout-level wrapper's enter/exit never retriggers. See `route-transition.tsx` and how `page.tsx`/`library/page.tsx`/`studio/page.tsx` each wrap their `<main>` in it.
 - `ShimmerButton` wrapped in `<Link>` nested a `<button>` inside an `<a>` — invalid HTML, breaks keyboard/screen-reader nav (WCAG 4.1.2), caught by `accessibility-scan`. Fixed by adding `asChild` to `ShimmerButton`: since it renders multiple decorative sibling `<div>`s alongside `children` (not just one), Radix `Slot` can't merge props onto it (`Slot` needs exactly one child) — used `React.cloneElement` instead, moving the decoration *inside* the child's own children rather than as siblings. Any future "button-as-link" component needs the same treatment if it has decorative markup beyond `children`.
 - Section headings must increase by one level with no skips (`h1` → `h2` → `h3`, never `h1` → `h3`) — `accessibility-scan` flagged `ScrollFeatures`' `<h3>` feature-card titles on the homepage, which had no `<h2>` before them (unlike `/library` and `/studio`, which have visible section labels as `<h2>`). Fixed by changing them to `<h2>`.
+- react-bits components installed via the shadcn CLI land without a `"use client"` directive even though they use hooks — the CLI doesn't add it. Always check for and add it manually, or the build fails with "You're importing a module that depends on `useX` into a React Server Component module."
+- `community/aurora.tsx` had the same "write to a ref during render" (`propsRef.current = props`) and "prefer-const" issues seen elsewhere — fixed with a `useLayoutEffect` for the ref write, and by reordering the WebGL setup so `program` is assigned once via `const` instead of predeclared with `let` and assigned later (the `resize` closure that reads it is only ever *called* after that point, so the reorder is safe).

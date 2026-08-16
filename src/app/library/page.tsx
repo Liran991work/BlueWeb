@@ -27,6 +27,8 @@ import { RainbowButton } from "@/components/ui/rainbow-button";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { TypingAnimation } from "@/components/ui/typing-animation";
 import { BeamDemo } from "@/components/demo/beam-demo";
+import Aurora from "@/components/community/aurora";
+import SplitText from "@/components/community/split-text";
 import { MagneticButton } from "@/components/motion/magnetic-button";
 import { Parallax } from "@/components/motion/parallax";
 import { RouteTransition } from "@/components/route-transition";
@@ -268,6 +270,36 @@ export default function LibraryPage() {
                 </div>
               </Parallax>
             </div>
+          </div>
+        </section>
+
+        {/* Community (react-bits) */}
+        <section className="mt-16">
+          <h2 className="text-xs font-semibold tracking-widest text-white/40 uppercase">
+            Community (react-bits)
+          </h2>
+          <p className="mt-1 max-w-xl text-xs text-white/40">
+            Open-source, no account needed:{" "}
+            <a
+              href="https://reactbits.dev"
+              className="underline underline-offset-4 hover:text-white"
+            >
+              reactbits.dev
+            </a>
+            . CSS/GSAP-first, WebGL only where it earns it.
+          </p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <ShowcaseCard title="Aurora" previewClassName="h-56 p-0 bg-black">
+              <Aurora colorStops={["#3a29ff", "#5227ff", "#8c67ff"]} amplitude={0.8} blend={0.6} />
+            </ShowcaseCard>
+            <ShowcaseCard title="Split Text" previewClassName="h-56">
+              <SplitText
+                text="Character by character."
+                tag="span"
+                className="text-2xl font-semibold"
+                splitType="chars"
+              />
+            </ShowcaseCard>
           </div>
         </section>
 
